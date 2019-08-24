@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class SignupPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _LoginPageState();
+  State<StatefulWidget> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final TextEditingController _passwordFilter = new TextEditingController();
   String _email = "";
   String _password = "";
 
-  _LoginPageState() {
+  _SignupPageState() {
     _passwordFilter.addListener(_passwordListen);
   }
 
@@ -38,13 +38,9 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _goSignup(BuildContext context){
-    Navigator.pushNamed(context, '/signup');
-  }
-
   Widget _buildBar(BuildContext context) {
     return new AppBar(
-      title: new Text("Login"),
+      title: new Text("Sign Up"),
       centerTitle: true,
     );
   }
@@ -55,18 +51,17 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           new Container(
             child: new TextFormField(
-              // textAlignVertical: TextAlignVertical(y:-0.9),
               decoration: new InputDecoration(
-                labelText: 'Email'
+                labelText: 'Email',
               ),
-              validator: (value) => value.isEmpty ? 'Email can\'t be empty': null 
+              validator: (value) => value.isEmpty ? 'Email can\'t be empty': null
             ),
           ),
           new Container(
             child: new TextField(
               controller: _passwordFilter,
               decoration: new InputDecoration(
-                labelText: 'Password'
+                labelText: 'Password',
               ),
               obscureText: true,
             ),
@@ -77,33 +72,30 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildButtons() {
-      return new Container(
-        padding: EdgeInsets.only(top: 15.0),
-        child: new Column(
-          children: <Widget>[
-            new RaisedButton(
-              child: new Text('Login'),
-              onPressed: _loginPressed,
-            ),
-            new FlatButton(
-              child: new Text('Dont have an account? Tap here to register.'),
-              onPressed: (){
-                _goSignup(context);
-              },
-            ),
-            new FlatButton(
-              child: new Text('Forgot Password?'),
-              onPressed: _passwordReset,
-            )
-          ],
-        ),
-      );
+    return new Container(
+      padding: EdgeInsets.only(top: 15.0),
+      child: new Column(
+        children: <Widget>[
+          new RaisedButton(
+            child: new Text('Create an Account'),
+            onPressed: _createAccountPressed,
+          ),
+          new FlatButton(
+            child: new Text('Have an account? Click here to login.'),
+            onPressed: (){
+              Navigator.pushNamed(context, '/login');
+            },
+          )
+        ],
+      ),
+    );
   }
 
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
-  void _loginPressed () {
-    print('The user wants to login with $_email and $_password');
+  void _createAccountPressed () {
+    print('The user wants to create an accoutn with $_email and $_password');
+
   }
 
   void _passwordReset () {
