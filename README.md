@@ -1,4 +1,4 @@
-# my_app
+# flutter-book-reader
 
 A new Flutter project.
 
