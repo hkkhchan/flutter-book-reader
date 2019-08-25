@@ -10,10 +10,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordFilter = new TextEditingController();
   String _email = "";
   String _password = "";
+  final _formKey = GlobalKey<FormState>();
 
-  _LoginPageState() {
-    _passwordFilter.addListener(_passwordListen);
-  }
+  _LoginPageState();
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +30,26 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _passwordListen() {
-    if (_passwordFilter.text.isEmpty) {
-      _password = "";
+  bool validAndSave(){
+    final form = _formKey.currentState;
+    if (form.validate()){
+      form.save();
+      return true;
     } else {
-      _password = _passwordFilter.text;
+      return false;
     }
+  }
+
+  void _submit() async{
+    if (validAndSave()){
+      try{
+        FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+        print('Sign in: ${user.uid}');
+      } catch(e){
+        print('error: $e');
+      }
+    }
+    print('The user wants to login with $_email and $_password');
   }
 
   void _goSignup(BuildContext context){
@@ -52,28 +65,31 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildTextFields() {
     return new Container(
-      child: new Column(
-        children: <Widget>[
-          new Container(
-            child: new TextFormField(
-              // textAlignVertical: TextAlignVertical(y:-0.9),
-              decoration: new InputDecoration(
-                labelText: 'Email'
+      child: Form(
+        key: _formKey,
+        child: new Column(
+          children: <Widget>[
+            new Container(
+              child: new TextFormField(
+                // textAlignVertical: TextAlignVertical(y:-0.9),
+                decoration: new InputDecoration(
+                  labelText: 'Email'
+                ),
+                onSaved: (value)=> _email = value,
+                validator: (value) => value.isEmpty ? 'Email can\'t be empty': null 
               ),
-              onSaved: (value)=> _email = value,
-              validator: (value) => value.isEmpty ? 'Email can\'t be empty': null 
             ),
-          ),
-          new Container(
-            child: new TextField(
-              controller: _passwordFilter,
-              decoration: new InputDecoration(
-                labelText: 'Password'
+            new Container(
+              child: new TextFormField(
+                decoration: new InputDecoration(
+                  labelText: 'Password'
+                ),
+                obscureText: true,
+                onSaved: (value) => _password = value,
               ),
-              obscureText: true,
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -85,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             new RaisedButton(
               child: new Text('Login'),
-              onPressed: _loginPressed,
+              onPressed: _submit,
             ),
             new FlatButton(
               child: new Text('Dont have an account? Tap here to register.'),
@@ -100,19 +116,6 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       );
-  }
-
-  // These functions can self contain any user auth logic required, they all have access to _email and _password
-
-  void _loginPressed () async{
-    _email = 'wkkhchan@gmail.com';
-    try{
-      FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-      print('Sign in: ${user.uid}');
-    } catch(e){
-      print('error: $e');
-    }
-    print('The user wants to login with $_email and $_password');
   }
 
   void _passwordReset () {
