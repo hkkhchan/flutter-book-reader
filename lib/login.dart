@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -59,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: new InputDecoration(
                 labelText: 'Email'
               ),
+              onSaved: (value)=> _email = value,
               validator: (value) => value.isEmpty ? 'Email can\'t be empty': null 
             ),
           ),
@@ -102,7 +104,14 @@ class _LoginPageState extends State<LoginPage> {
 
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
-  void _loginPressed () {
+  void _loginPressed () async{
+    _email = 'wkkhchan@gmail.com';
+    try{
+      FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+      print('Sign in: ${user.uid}');
+    } catch(e){
+      print('error: $e');
+    }
     print('The user wants to login with $_email and $_password');
   }
 
