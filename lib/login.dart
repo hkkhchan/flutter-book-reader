@@ -7,7 +7,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _passwordFilter = new TextEditingController();
   String _email = "";
   String _password = "";
   final _formKey = GlobalKey<FormState>();
@@ -52,8 +51,12 @@ class _LoginPageState extends State<LoginPage> {
     print('The user wants to login with $_email and $_password');
   }
 
-  void _goSignup(BuildContext context){
+  void _goSignup(){
     Navigator.pushNamed(context, '/signup');
+  }
+
+  void _goForgetPassword(){
+    Navigator.pushNamed(context, '/forget-password');
   }
 
   Widget _buildBar(BuildContext context) {
@@ -71,7 +74,6 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             new Container(
               child: new TextFormField(
-                // textAlignVertical: TextAlignVertical(y:-0.9),
                 decoration: new InputDecoration(
                   labelText: 'Email'
                 ),
@@ -105,22 +107,15 @@ class _LoginPageState extends State<LoginPage> {
             ),
             new FlatButton(
               child: new Text('Dont have an account? Tap here to register.'),
-              onPressed: (){
-                _goSignup(context);
-              },
+              onPressed: _goSignup,
             ),
             new FlatButton(
               child: new Text('Forgot Password?'),
-              onPressed: _passwordReset,
+              onPressed: _goForgetPassword,
             )
           ],
         ),
       );
   }
-
-  void _passwordReset () {
-    print("The user wants a password reset request sent to $_email");
-  }
-
 
 }
