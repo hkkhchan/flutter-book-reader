@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-
+import 'auth.dart';
 class SignupPage extends StatefulWidget {
+  SignupPage({this.auth});
+  final BaseAuth auth;
+
   @override
   State<StatefulWidget> createState() => _SignupPageState();
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final TextEditingController _passwordFilter = new TextEditingController();
   String _email = "";
   String _password = "";
+  GlobalKey<FormState> _formKey;
 
-  _SignupPageState() {
-    _passwordFilter.addListener(_passwordListen);
-  }
+  _SignupPageState();
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: _buildBar(context),
-      body: new Container(
-        padding: EdgeInsets.all(16.0),
+      body: Form(
+        key: _formKey,
         child: new Column(
           children: <Widget>[
             _buildTextFields(),
@@ -28,14 +29,6 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
-  }
-
-  void _passwordListen() {
-    if (_passwordFilter.text.isEmpty) {
-      _password = "";
-    } else {
-      _password = _passwordFilter.text;
-    }
   }
 
   Widget _buildBar(BuildContext context) {
@@ -54,15 +47,16 @@ class _SignupPageState extends State<SignupPage> {
               decoration: new InputDecoration(
                 labelText: 'Email',
               ),
+              onSaved: (value)=> _email = value,
               validator: (value) => value.isEmpty ? 'Email can\'t be empty': null
             ),
           ),
           new Container(
-            child: new TextField(
-              controller: _passwordFilter,
+            child: new TextFormField(
               decoration: new InputDecoration(
                 labelText: 'Password',
               ),
+              onSaved: (value)=> _password = value,
               obscureText: true,
             ),
           )
@@ -91,16 +85,25 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  // These functions can self contain any user auth logic required, they all have access to _email and _password
-
-  void _createAccountPressed () {
-    print('The user wants to create an accoutn with $_email and $_password');
-
+  bool validAndSave(){
+    final form = _formKey.currentState;
+    if (form.validate()){
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  void _passwordReset () {
-    print("The user wants a password reset request sent to $_email");
+  void _createAccountPressed () async {
+    if(validAndSave()){
+      try{
+        var uid = await widget.auth.signInWithEmailAndPassword(_email, _password);
+        print('Sign in: $uid');
+      } catch(e){
+        print('error: $e');
+      }
+    }
   }
-
 
 }

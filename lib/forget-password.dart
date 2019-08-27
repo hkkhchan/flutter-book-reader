@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'auth.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
+  ForgetPasswordPage({this.auth});
+  final BaseAuth auth;
+
   @override
   State<StatefulWidget> createState() => _ForgetPasswordPageState();
 }
@@ -69,12 +72,14 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
     if(form.validate()){
       form.save();
       print('The user wants to send forget password with $_email');
-      Future future = Future.delayed(Duration(seconds: 3),(){
-        return FirebaseAuth.instance.fetchSignInMethodsForEmail(email: _email);
-      });
+      
       try{
-        await future;
-        _showDialog('success');
+        var uid = widget.auth.fetchSignInMethodsForEmail(_email);
+        if (uid != null){
+          _showDialog('success');
+        } else {
+          _showDialog('not-found');
+        }
       } catch(e){
         print('Error: $e');
         _showDialog('not-found');

@@ -4,6 +4,7 @@ import './login.dart';
 import './signup.dart';
 import './test.dart';
 import './forget-password.dart';
+import 'auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget{
       title: 'Book Reader',
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(),
+        '/': (context) => TestPage(),
         '/test': (context) => TestPage(),
-        '/signup': (context) => SignupPage(),
-        '/login': (context) => LoginPage(),
-        '/forget-password': (context)=> ForgetPasswordPage()
+        '/signup': (context) => SignupPage(auth: Auth()),
+        '/login': (context) => LoginPage(auth: Auth()),
+        '/forget-password': (context)=> ForgetPasswordPage(auth: Auth())
       },
     );
   }
