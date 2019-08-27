@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget{
       title: 'Book Reader',
       initialRoute: '/',
       routes: {
-        '/': (context) => TestPage(),
+        '/': (context) => LoginPage(auth: Auth()),
         '/test': (context) => TestPage(),
         '/signup': (context) => SignupPage(auth: Auth()),
         '/login': (context) => LoginPage(auth: Auth()),
