@@ -76,9 +76,7 @@ class _SignupPageState extends State<SignupPage> {
           ),
           new FlatButton(
             child: new Text('Have an account? Click here to login.'),
-            onPressed: (){
-              Navigator.pushNamed(context, '/login');
-            },
+            onPressed: _goLogin,
           )
         ],
       ),
@@ -104,6 +102,10 @@ class _SignupPageState extends State<SignupPage> {
         print('error: $e');
       }
     }
+  }
+
+  void _goLogin(){
+    Navigator.pushNamed(context, '/login');
   }
 
 }
