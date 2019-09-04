@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'auth.dart';
+import 'auth-provider.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.auth});
-
-  final BaseAuth auth;
+  LoginPage({this.onLogin});
+  final VoidCallback onLogin;
   @override
   State<StatefulWidget> createState() => _LoginPageState();
 }
@@ -45,8 +45,10 @@ class _LoginPageState extends State<LoginPage> {
   void _loginPressed() async{
     if (validAndSave()){
       try{
-        var uid = await widget.auth.signInWithEmailAndPassword(_email, _password);
+        final BaseAuth auth = AuthProvider.of(context).auth;
+        var uid = await auth.signInWithEmailAndPassword(_email, _password);
         print('Sign in: $uid');
+        widget.onLogin();
       } catch(e){
         print('error: $e');
       }
