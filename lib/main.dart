@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/forget-password.dart';
 import './login.dart';
-import './signup.dart';
+import './sign-up.dart';
 import './test.dart';
 import './forget-password.dart';
 import 'auth.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget{
       routes: {
         '/': (context) => LoginPage(auth: Auth()),
         '/test': (context) => TestPage(),
-        '/signup': (context) => SignupPage(auth: Auth()),
+        '/signup': (context) => SignUpPage(auth: Auth()),
         '/login': (context) => LoginPage(auth: Auth()),
         '/forget-password': (context)=> ForgetPasswordPage(auth: Auth())
       },

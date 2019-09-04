@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'auth.dart';
-class SignupPage extends StatefulWidget {
-  SignupPage({this.auth});
+class SignUpPage extends StatefulWidget {
+  SignUpPage({this.auth});
   final BaseAuth auth;
 
   @override
-  State<StatefulWidget> createState() => _SignupPageState();
+  State<StatefulWidget> createState() => _SignUpPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignUpPageState extends State<SignUpPage> {
   String _email = "";
   String _password = "";
   GlobalKey<FormState> _formKey;
 
-  _SignupPageState();
+  _SignUpPageState();
 
   @override
   Widget build(BuildContext context) {
