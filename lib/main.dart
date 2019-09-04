@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/forget-password.dart';
-import './login.dart';
-import './sign-up.dart';
-import './test.dart';
-import './forget-password.dart';
+import 'package:my_app/forget-password-page.dart';
+import './login-page.dart';
+import './sign-up-page.dart';
+import './test-page.dart';
+import './forget-password-page.dart';
 import 'auth.dart';
 
 void main() {
