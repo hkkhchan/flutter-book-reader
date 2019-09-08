@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'auth.dart';
 class SignUpPage extends StatefulWidget {
   SignUpPage({this.auth});
@@ -11,6 +12,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   String _email = "";
   String _password = "";
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _SignUpPageState();
@@ -18,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: _buildBar(context),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -103,10 +106,10 @@ class _SignUpPageState extends State<SignUpPage> {
   void _createAccountPressed () async {
     if(validAndSave()){
       try{
-        var uid = await widget.auth.signInWithEmailAndPassword(_email, _password);
-        print('User exist: $uid');
+        var uid = await widget.auth.createUserWithEmailAndPassword(_email, _password);
+        print('User created: $uid');
       } catch(e){
-        print('error: $e');
+        print('Error:' + e);
       }
     }
   }
