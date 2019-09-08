@@ -11,7 +11,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   String _email = "";
   String _password = "";
-  GlobalKey<FormState> _formKey;
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _SignUpPageState();
 
@@ -19,15 +19,10 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildBar(context),
-      body: Form(
-        key: _formKey,
-        child: new Column(
-          children: <Widget>[
-            _buildTextFields(),
-            _buildButtons(),
-          ],
-        ),
-      ),
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: _buildForm(context)
+      )
     );
   }
 
@@ -35,6 +30,18 @@ class _SignUpPageState extends State<SignUpPage> {
     return new AppBar(
       title: new Text("Sign Up"),
       centerTitle: true,
+    );
+  }
+
+  Widget _buildForm(BuildContext context){
+    return Form(
+      key: _formKey,
+      child: new Column(
+        children: <Widget>[
+          _buildTextFields(),
+          _buildButtons(),
+        ],
+      ),
     );
   }
 
@@ -97,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if(validAndSave()){
       try{
         var uid = await widget.auth.signInWithEmailAndPassword(_email, _password);
-        print('Sign in: $uid');
+        print('User exist: $uid');
       } catch(e){
         print('error: $e');
       }
