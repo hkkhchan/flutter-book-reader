@@ -17,7 +17,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: _buildBar(context),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -32,20 +32,20 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   }
 
   Widget _buildBar(BuildContext context) {
-    return new AppBar(
-      title: new Text("Forget Password"),
+    return AppBar(
+      title: Text("Forget Password"),
       centerTitle: true,
     );
   }
 
   Widget _buildEmailFields() {
-    return new Container(
-      child: new Column(
+    return Container(
+      child: Column(
         children: <Widget>[
-          new Form(
+          Form(
             key: _formKey,
-            child: new TextFormField(
-              decoration: new InputDecoration(
+            child: TextFormField(
+              decoration: InputDecoration(
                 labelText: 'Email',
               ),
               onSaved: (value)=> _email = value,
@@ -60,8 +60,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   Widget _buildSendButtons() {
     return new Container(
       padding: EdgeInsets.only(top: 15.0),
-      child: new RaisedButton(
-        child: new Text('Send'),
+      child: RaisedButton(
+        child: Text('Send'),
         onPressed: _sendPressed,
       ),
     );
