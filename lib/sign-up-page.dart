@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _buildForm(BuildContext context){
     return Form(
       key: _formKey,
-      child: new Column(
+      child: Column(
         children: <Widget>[
           _buildTextFields(),
           _buildButtons(),
@@ -49,21 +49,21 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _buildTextFields() {
-    return new Container(
-      child: new Column(
+    return Container(
+      child: Column(
         children: <Widget>[
-          new Container(
-            child: new TextFormField(
-              decoration: new InputDecoration(
+          Container(
+            child: TextFormField(
+              decoration: InputDecoration(
                 labelText: 'Email',
               ),
               onSaved: (value)=> _email = value,
               validator: (value) => value.isEmpty ? 'Email can\'t be empty': null
             ),
           ),
-          new Container(
-            child: new TextFormField(
-              decoration: new InputDecoration(
+          Container(
+            child: TextFormField(
+              decoration: InputDecoration(
                 labelText: 'Password',
               ),
               onSaved: (value)=> _password = value,
@@ -76,16 +76,16 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _buildButtons() {
-    return new Container(
+    return Container(
       padding: EdgeInsets.only(top: 15.0),
-      child: new Column(
+      child: Column(
         children: <Widget>[
-          new RaisedButton(
-            child: new Text('Create an Account'),
+          RaisedButton(
+            child: Text('Create an Account'),
             onPressed: _createAccountPressed,
           ),
-          new FlatButton(
-            child: new Text('Have an account? Click here to login.'),
+          FlatButton(
+            child: Text('Have an account? Click here to login.'),
             onPressed: _goLogin,
           )
         ],
