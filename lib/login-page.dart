@@ -47,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
       try{
         var uid = await widget.auth.signInWithEmailAndPassword(_email, _password);
         print('Sign in: $uid');
+        _goText();
       } catch(e){
         print('error: $e');
       }
@@ -59,6 +60,10 @@ class _LoginPageState extends State<LoginPage> {
 
   void _goForgetPassword(){
     Navigator.pushNamed(context, '/forget-password');
+  }
+
+  void _goText(){
+    Navigator.pushNamed(context, '/test');
   }
 
   Widget _buildBar(BuildContext context) {

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'auth.dart';
 
 class TestPage extends StatefulWidget {
-  const TestPage({Key key}): super(key: key);
+  const TestPage({this.auth});
+
+  final BaseAuth auth;
+
   @override
   State<StatefulWidget> createState() => _TestPageState('header');
 }
@@ -12,32 +16,36 @@ class _TestPageState extends State<TestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: _buildBar(context),
       body: Column(children: <Widget>[
-        RaisedButton(
-          child: Text('Login'),
-          onPressed: () {
-            // Navigate to the second screen using a named route.
-            Navigator.pushNamed(context, '/login');
-          },
-        ),
-        RaisedButton(
-          child: Text('Signup'),
-          onPressed: () {
-            // Navigate to the second screen using a named route.
-            Navigator.pushNamed(context, '/signup');
-          },
-        ),
+        _buildImage(context),
+        _buildText(context)
       ],)
     );
   }
 
   Widget _buildBar(BuildContext context){
-    return new AppBar(
-      title: new Text(_title),
+    return AppBar(
+      title: Text(_title),
       centerTitle: true,
     );
   }
+
+  Widget _buildImage(BuildContext context){
+    AssetImage assetImage = AssetImage('images/book.png');
+    return Container(
+        margin: const EdgeInsets.only(top: 100.0),
+        child:Center(
+          child:Image(image: assetImage)
+        )
+    );
+  }
+
+  Widget _buildText(BuildContext context){
+
+    return Text(_title);
+  }
+
 
 }
