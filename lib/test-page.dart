@@ -43,8 +43,8 @@ class _TestPageState extends State<TestPage> {
   }
 
   Widget _buildText(BuildContext context){
-
-    return Text(_title);
+    String email = 'null string';
+    return Text(email);
   }
 
 
