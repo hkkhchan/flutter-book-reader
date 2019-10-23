@@ -5,6 +5,8 @@ import './sign-up-page.dart';
 import './test-page.dart';
 import './forget-password-page.dart';
 import 'auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'lang.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +15,8 @@ void main() {
 class MyApp extends StatelessWidget{
   @override Widget build(BuildContext context){
     return MaterialApp(
-      title: 'Book Reader',
+      title: 'test',
+//      title: Lang.of(context).text('test'),
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(auth: Auth()),
@@ -23,6 +26,16 @@ class MyApp extends StatelessWidget{
         '/login': (context) => LoginPage(auth: Auth()),
         '/forget-password': (context)=> ForgetPasswordPage(auth: Auth())
       },
+      localizationsDelegates: [
+        const LangDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en'),
+        const Locale('tc'),
+        const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'HK')
+      ],
     );
   }
 }

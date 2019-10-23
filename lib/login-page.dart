@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'auth.dart';
+import 'lang.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({this.auth});
@@ -7,6 +8,7 @@ class LoginPage extends StatefulWidget {
   final BaseAuth auth;
   @override
   State<StatefulWidget> createState() => _LoginPageState();
+
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -68,7 +70,8 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildBar(BuildContext context) {
     return new AppBar(
-      title: new Text("Login"),
+      title: new Text(Lang.of(context).text('test')),
+//      title: new Text("Login"),
       centerTitle: true,
     );
   }
