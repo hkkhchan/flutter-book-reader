@@ -33,8 +33,7 @@ class MyApp extends StatelessWidget{
       ],
       supportedLocales: [
         const Locale('en'),
-        const Locale('tc'),
-        const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'HK')
+        const Locale.fromSubtags(languageCode: 'tc', scriptCode: 'Hant', countryCode: 'HK')
       ],
     );
   }
