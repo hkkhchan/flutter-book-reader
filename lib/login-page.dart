@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildBar(BuildContext context){
     return new AppBar(
-      title: new Text(Lang.of(context).text('test')),
+      title: new Text(Lang.of(context).text('login')),
       centerTitle: true,
     );
   }

@@ -14,17 +14,18 @@ void main() {
 
 class MyApp extends StatelessWidget{
   @override Widget build(BuildContext context){
+    Auth auth = Auth();
     return MaterialApp(
       title: 'test',
 //      title: Lang.of(context).text('test'),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(auth: Auth()),
+        '/': (context) => LoginPage(auth: auth),
 //        '/': (context) => TestPage(auth: Auth()),
-        '/test': (context) => TestPage(auth: Auth()),
-        '/signup': (context) => SignUpPage(auth: Auth()),
-        '/login': (context) => LoginPage(auth: Auth()),
-        '/forget-password': (context)=> ForgetPasswordPage(auth: Auth())
+        '/test': (context) => TestPage(auth: auth),
+        '/signup': (context) => SignUpPage(auth: auth),
+        '/login': (context) => LoginPage(auth: auth),
+        '/forget-password': (context)=> ForgetPasswordPage(auth: auth)
       },
       locale: Locale.fromSubtags(languageCode: 'zh'),
       localizationsDelegates: [
