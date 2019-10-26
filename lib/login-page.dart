@@ -14,9 +14,15 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _email = "";
   String _password = "";
+  Locale locale;
   final _formKey = GlobalKey<FormState>();
 
   _LoginPageState();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +74,9 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pushNamed(context, '/test');
   }
 
-  Widget _buildBar(BuildContext context) {
+  Widget _buildBar(BuildContext context){
     return new AppBar(
       title: new Text(Lang.of(context).text('test')),
-//      title: new Text("Login"),
       centerTitle: true,
     );
   }

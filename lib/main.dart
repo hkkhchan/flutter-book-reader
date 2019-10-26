@@ -26,14 +26,15 @@ class MyApp extends StatelessWidget{
         '/login': (context) => LoginPage(auth: Auth()),
         '/forget-password': (context)=> ForgetPasswordPage(auth: Auth())
       },
+      locale: Locale.fromSubtags(languageCode: 'zh'),
       localizationsDelegates: [
         const LangDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('en'),
-        const Locale.fromSubtags(languageCode: 'tc', scriptCode: 'Hant', countryCode: 'HK')
+        const Locale.fromSubtags(languageCode: 'zh'),
+        const Locale('en')
       ],
     );
   }
